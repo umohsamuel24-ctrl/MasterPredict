@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>GoalBet - Settings</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f5f7;
+      color: #17202a;
+    }
+
+    header {
+      background: #071d35;
+      color: white;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #22c55e;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 35px auto;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 20px;
+    }
+
+    .menu,
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+
+    .menu {
+      padding: 10px;
+      height: fit-content;
+    }
+
+    .menu button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .menu button:hover,
+    .menu button.active {
+      background: #e9f9ef;
+      color: #16a34a;
+    }
+
+    .card {
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin-bottom: 8px;
+    }
+
+    .description {
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .setting-row:last-child {
+      border-bottom: none;
+    }
+
+    .setting-row p {
+      color: #64748b;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .switch {
+      position: relative;
+      width: 45px;
+      height: 24px;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #cbd5e1;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: .2s;
+    }
+
+    input:checked + .slider {
+      background: #22c55e;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(21px);
+    }
+
+    /* AI */
+
+    .ai-box {
+      background: linear-gradient(135deg, #071d35, #123b61);
+      color: white;
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .ai-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .ai-icon {
+      background: #22c55e;
+      color: #061b12;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 21px;
+    }
+
+    .ai-box p {
+      color: #d5e3ef;
+      margin-bottom: 18px;
+    }
+
+    .quick-questions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .quick-questions button {
+      border: 1px solid #41617d;
+      background: #173b5c;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .chat {
+      height: 320px;
+      overflow-y: auto;
+      background: #f8fafc;
+      color: #17202a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      padding: 10px 13px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      max-width: 85%;
+      line-height: 1.4;
+    }
+
+    .user-message {
+      background: #dcfce7;
+      margin-left: auto;
+    }
+
+    .ai-message {
+      background: #e2e8f0;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 7px;
+    }
+
+    .chat-input button {
+      background: #22c55e;
+      border: none;
+      padding: 0 20px;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* SAFETY */
+
+    .warning {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 15px;
+      margin-top: 15px;
+      color: #7c2d12;
+    }
+
+    .danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .danger button {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    @media(max-width: 750px) {
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .setting-row {
+        gap: 15px;
+      }
+
+      header {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    ⚽ GoalBet
+  </div>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="index.html">Sports</a>
+  </div>
+
+</header>
+
+
+<div class="container">
+
+  <h1>Settings</h1>
+
+  <div class="settings-grid">
+
+    <!-- SETTINGS MENU -->
+
+    <div class="menu">
+
+      <button class="active" onclick="showSection('account', this)">
+        👤 Account
+      </button>
+
+      <button onclick="showSection('notifications', this)">
+        🔔 Notifications
+      </button>
+
+      <button onclick="showSection('security', this)">
+        🔐 Security
+      </button>
+
+      <button onclick="showSection('responsible', this)">
+        🛡️ Responsible Betting
+      </button>
+
+      <button onclick="showSection('ai', this)">
+        🤖 AI Assistant
+      </button>
+
+      <button onclick="showSection('terms', this)">
+        📄 Terms & Conditions
+      </button>
+
+    </div>
+
+
+    <!-- SETTINGS CONTENT -->
+
+    <div>
+
+      <!-- ACCOUNT -->
+
+      <section id="account" class="card">
+
+        <h2>Account Settings</h2>
+
+        <p class="description">
+          Manage your GoalBet account information.
+        </p>
+
+        <div class="setting-row">
+          <div>
+            <strong>Username</strong>
+            <p>DemoUser123</p>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Email</strong>
+            <p>user@example.com</p>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Account Status</strong>
+            <p id="accountStatus">Active</p>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- NOTIFICATIONS -->
+
+      <section id="notifications" class="card" hidden>
+
+        <h2>Notifications</h2>
+
+        <p class="description">
+          Choose what notifications you receive.
+        </p>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Match notifications</strong>
+            <p>Receive match reminders.</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+
+        </div>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Bet slip updates</strong>
+            <p>Receive updates about your selections.</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+
+        </div>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Promotional notifications</strong>
+            <p>Receive promotional messages.</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- SECURITY -->
+
+      <section id="security" class="card" hidden>
+
+        <h2>Security</h2>
+
+        <p class="description">
+          Protect your account.
+        </p>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Two-factor authentication</strong>
+            <p>Add another layer of account protection.</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+
+        </div>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Login notifications</strong>
+            <p>Notify me when a new login occurs.</p>
+          </div>
+
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- RESPONSIBLE BETTING -->
+
+      <section id="responsible" class="card" hidden>
+
+        <h2>Responsible Betting</h2>
+
+        <p class="description">
+          Set personal limits and take control of your betting activity.
+        </p>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Daily spending limit</strong>
+            <p>Demo limit: ₦10,000</p>
+          </div>
+
+          <button onclick="setLimit()">
+            Change
+          </button>
+
+        </div>
+
+        <div class="setting-row">
+
+          <div>
+            <strong>Weekly spending limit</strong>
+            <p>Demo limit: ₦50,000</p>
+          </div>
+
+          <button onclick="setLimit()">
+            Change
+          </button>
+
+        </div>
+
+        <div class="warning">
+          Betting should be treated as entertainment. Never bet more
+          than you can afford to lose.
+        </div>
+
+      </section>
+
+
+      <!-- AI -->
+
+      <section id="ai" class="card" hidden>
+
+        <div class="ai-box">
+
+          <div class="ai-title">
+
+            <div class="ai-icon">
+              🤖
+            </div>
+
+            <div>
+              <h2>GoalBet AI Assistant</h2>
+              <small>Site Help & Account Safety</small>
+            </div>
+
+          </div>
+
+          <p>
+            Ask me about GoalBet, how the bet slip works, site rules,
+            account settings, responsible betting, or the Terms &
+            Conditions.
+          </p>
+
+
+          <div class="quick-questions">
+
+            <button onclick="askAI('How does the bet slip work?')">
+              Bet Slip
+            </button>
+
+            <button onclick="askAI('What are the site rules?')">
+              Site Rules
+            </button>
+
+            <button onclick="askAI('Why can an account be restricted?')">
+              Account Rules
+            </button>
+
+            <button onclick="askAI('How can I set a betting limit?')">
+              Betting Limits
+            </button>
+
+          </div>
+
+
+          <div class="chat" id="chat">
+
+            <div class="message ai-message">
+              👋 Hello! I'm the GoalBet AI Assistant.
+              Ask me anything about this website.
+            </div>
+
+          </div>
+
+
+          <div class="chat-input">
+
+            <input
+              id="aiInput"
+              type="text"
+              placeholder="Ask about GoalBet..."
+              onkeydown="handleAIKey(event)"
+            >
+
+            <button onclick="sendAI()">
+              Send
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TERMS -->
+
+      <section id="terms" class="card" hidden>
+
+        <h2>Terms & Conditions</h2>
+
+        <p class="description">
+          Important rules for using the GoalBet demo.
+        </p>
+
+        <div class="warning">
+
+          <strong>Account Safety</strong>
+
+          <p style="margin-top:8px">
+            Users must provide accurate information, respect other
+            users, avoid fraudulent activity, and follow applicable
+            laws and site rules.
+          </p>
+
+        </div>
+
+        <br>
+
+        <h3>Account restrictions</h3>
+
+        <p style="margin-top:10px; line-height:1.6">
+
+          GoalBet may flag accounts when its systems detect potential
+          violations. Restrictions should be based on documented rules
+          and appropriate review rather than an AI making an arbitrary
+          decision.
+
+        </p>
+
+        <br>
+
+        <h3>Responsible betting</h3>
+
+        <p style="margin-top:10px; line-height:1.6">
+
+          Users should only participate where permitted by law and
+          should use available responsible-play controls.
+
+        </p>
+
+      </section>
+
+
+      <!-- ACCOUNT SUSPENSION DEMO -->
+
+      <section class="card">
+
+        <h2>Account Safety Monitor</h2>
+
+        <p class="description">
+          Demonstration of how a rules-based account safety system
+          could communicate an account restriction.
+        </p>
+
+        <div id="safetyMessage" class="warning">
+
+          Your account is currently active.
+          No safety restrictions have been applied.
+
+        </div>
+
+        <button
+          onclick="demoViolation()"
+          style="
+            margin-top:15px;
+            padding:10px 15px;
+            border:none;
+            border-radius:6px;
+            background:#dc2626;
+            color:white;
+            cursor:pointer;
+          "
+        >
+          Demo Safety Flag
+        </button>
+
+      </section>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /*
+  ==========================================
+  SETTINGS NAVIGATION
+  ==========================================
+  */
+
+  function showSection(sectionId, button) {
+
+    const sections =
+      document.querySelectorAll(
+        ".card[id]"
+      );
+
+    sections.forEach(section => {
+      section.hidden = true;
+    });
+
+
+    document.getElementById(sectionId).hidden = false;
+
+
+    document
+      .querySelectorAll(".menu button")
+      .forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+
+    if (button) {
+      button.classList.add("active");
+    }
+
+  }
+
+
+  /*
+  ==========================================
+  AI KNOWLEDGE BASE
+  ==========================================
+  */
+
+  const aiKnowledge = [
+
+    {
+      keywords: [
+        "bet slip",
+        "betslip",
+        "bet slip work"
+      ],
+
+      answer:
+        "The bet slip shows the selections you choose from the available match odds. You can remove selections, enter a demo stake, and see the calculated potential return."
+    },
+
+
+    {
+      keywords: [
+        "rules",
+        "site rules",
+        "terms",
+        "terms and conditions"
+      ],
+
+      answer:
+        "The main site rules require users to follow the Terms & Conditions, provide accurate information, avoid fraudulent activity, respect other users, and use the platform only where permitted by applicable law."
+    },
+
+
+    {
+      keywords: [
+        "suspend",
+        "suspension",
+        "restricted",
+        "restriction"
+      ],
+
+      answer:
+        "An account can be flagged for a potential rules violation. In a production system, the safety system should record the reason and apply the site's documented review and restriction process. The AI should explain the rule rather than make arbitrary suspension decisions."
+    },
+
+
+    {
+      keywords: [
+        "limit",
+        "limits",
+        "spending limit",
+        "betting limit"
+      ],
+
+      answer:
+        "You can use the Responsible Betting section to configure personal spending limits. The demo currently includes daily and weekly limits."
+    },
+
+
+    {
+      keywords: [
+        "security",
+        "2fa",
+        "two factor"
+      ],
+
+      answer:
+        "Open Settings > Security to enable two-factor authentication and login notifications."
+    },
+
+
+    {
+      keywords: [
+        "notification",
+        "notifications"
+      ],
+
+      answer:
+        "Open Settings > Notifications to control match notifications, bet-slip updates, and promotional notifications."
+    },
+
+
+    {
+      keywords: [
+        "sports",
+        "matches",
+        "football",
+        "basketball",
+        "tennis"
+      ],
+
+      answer:
+        "The Home page contains the available demo matches. Use the sport filters or search box to find matches and teams."
+    },
+
+
+    {
+      keywords: [
+        "account",
+        "profile"
+      ],
+
+      answer:
+        "Open Settings > Account to view your account information and current account status."
+    },
+
+
+    {
+      keywords: [
+        "hello",
+        "hi",
+        "hey"
+      ],
+
+      answer:
+        "Hello! I'm the GoalBet AI Assistant. I can explain the website, settings, betting interface, responsible-play tools, and Terms & Conditions."
+    }
+
+  ];
+
+
+  /*
+  ==========================================
+  AI RESPONSE
+  ==========================================
+  */
+
+  function getAIResponse(question) {
+
+    const text =
+      question.toLowerCase();
+
+
+    for (const item of aiKnowledge) {
+
+      for (const keyword of item.keywords) {
+
+        if (text.includes(keyword)) {
+
+          return item.answer;
+
+        }
+
+      }
+
+    }
+
+
+    return `
+      I don't have enough information to answer that
+      specifically. I can explain GoalBet's matches,
+      bet slip, settings, account rules, security,
+      responsible betting tools, and Terms & Conditions.
+    `;
+
+  }
+
+
+  /*
+  ==========================================
+  SEND AI MESSAGE
+  ==========================================
+  */
+
+  function sendAI() {
+
+    const input =
+      document.getElementById("aiInput");
+
+    const question =
+      input.value.trim();
+
+
+    if (!question) return;
+
+
+    addChatMessage(
+      question,
+      "user-message"
+    );
+
+
+    input.value = "";
+
+
+    // Simulate AI thinking
+    setTimeout(() => {
+
+      const response =
+        getAIResponse(question);
+
+
+      addChatMessage(
+        response,
+        "ai-message"
+      );
+
+    }, 500);
+
+  }
+
+
+  /*
+  ==========================================
+  QUICK QUESTION
+  ==========================================
+  */
+
+  function askAI(question) {
+
+    document.getElementById("aiInput").value =
+      question;
+
+    sendAI();
+
+  }
+
+
+  /*
+  ==========================================
+  CHAT MESSAGE
+  ==========================================
+  */
+
+  function addChatMessage(message, className) {
+
+    const chat =
+      document.getElementById("chat");
+
+
+    const div =
+      document.createElement("div");
+
+
+    div.className =
+      `message ${className}`;
+
+
+    div.innerText =
+      message;
+
+
+    chat.appendChild(div);
+
+
+    chat.scrollTop =
+      chat.scrollHeight;
+
+  }
+
+
+  /*
+  ==========================================
+  ENTER KEY
+  ==========================================
+  */
+
+  function handleAIKey(event) {
+
+    if (event.key === "Enter") {
+
+      sendAI();
+
+    }
+
+  }
+
+
+  /*
+  ==========================================
+  RESPONSIBLE BETTING LIMIT
+  ==========================================
+  */
+
+  function setLimit() {
+
+    const limit =
+      prompt(
+        "Enter your new demo spending limit:"
+      );
+
+
+    if (!limit) return;
+
+
+    if (
+      isNaN(limit) ||
+      Number(limit) <= 0
+    ) {
+
+      alert(
+        "Please enter a valid amount."
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      `Your demo limit has been set to ₦${Number(limit).toLocaleString()}.`
+    );
+
+  }
+
+
+  /*
+  ==========================================
+  DEMO SAFETY FLAG
+  ==========================================
+  */
+
+  function demoViolation() {
+
+    const message =
+      document.getElementById(
+        "safetyMessage"
+      );
+
+
+    message.className =
+      "warning danger";
+
+
+    message.innerHTML = `
+      <strong>Account Safety Flag</strong>
+
+      <p style="margin-top:8px">
+        A potential Terms & Conditions violation
+        has been detected in this demonstration.
+        The account has been marked for review.
+      </p>
+
+      <button onclick="clearSafetyFlag()">
+        Clear Demo Flag
+      </button>
+    `;
+
+
+    document.getElementById(
+      "accountStatus"
+    ).innerText =
+      "Flagged for Review";
+
+  }
+
+
+  /*
+  ==========================================
+  CLEAR DEMO FLAG
+  ==========================================
+  */
+
+  function clearSafetyFlag() {
+
+    const message =
+      document.getElementById(
+        "safetyMessage"
+      );
+
+
+    message.className =
+      "warning";
+
+
+    message.innerHTML = `
+      Your account is currently active.
+      No safety restrictions have been applied.
+    `;
+
+
+    document.getElementById(
+      "accountStatus"
+    ).innerText =
+      "Active";
+
+  }
+
+</script>
+
+</body>
+</html>

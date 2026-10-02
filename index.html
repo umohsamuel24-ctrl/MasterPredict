@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>BetZone Football</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+        ⚽<span>Master</span>Predict
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#live">Live</a>
+        <a href="#matches">Football</a>
+        <a href="file:///C:/Users/USER/Documents/Dashbord/home.html#dashboard">Admin</a>
+        <a href="setting.html">Settings</a>
+        <a href="vip.html">GoalBet VIP</a>
+        <a href="login.html">LongIn</a>
+        <a href="logout.html">LogOut</a>
+        <a href="singup.html">SingUp</a>
+    </nav>
+
+    <div class="wallet">
+
+        <span></span>
+
+        <strong>
+            ₦<span id="balance">0.00</span>
+        </strong>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="live-label">
+            ● LIVE FOOTBALL BETTING
+        </div>
+
+        <h1>
+            Bet on the
+            <span>big matches.</span>
+        </h1>
+
+        <p>
+            Follow live football, upcoming matches,
+            results and betting odds.
+        </p>
+
+        <button
+            class="primary-btn"
+            onclick="depositMoney()">
+
+            💰 Deposit Money
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUICK MENU ================= -->
+
+<div class="quick-menu">
+
+    <button onclick="showCategory('all')">
+        ⚽ All
+    </button>
+
+    <button onclick="showCategory('live')">
+        🔴 Live
+    </button>
+
+    <button onclick="showCategory('upcoming')">
+        🟢 Upcoming
+    </button>
+
+    <button onclick="showCategory('finished')">
+        ⚪ Results
+    </button>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<main id="matches">
+
+    <div class="page-title">
+
+        <h2>
+            Football
+        </h2>
+
+        <p>
+            Choose a match and select your odds
+        </p>
+
+    </div>
+
+
+    <!-- LIVE -->
+
+    <section id="live">
+
+        <h3>🔴 Live Matches</h3>
+
+        <div
+            id="liveMatches"
+            class="match-list">
+        </div>
+
+    </section>
+
+
+    <!-- UPCOMING -->
+
+    <section>
+
+        <h3>🟢 Upcoming Matches</h3>
+
+        <div
+            id="upcomingMatches"
+            class="match-list">
+        </div>
+
+    </section>
+
+
+    <!-- FINISHED -->
+
+    <section>
+
+        <h3>⚪ Last Matches</h3>
+
+        <div
+            id="finishedMatches"
+            class="match-list">
+        </div>
+
+    </section>
+
+    <div class="boxes">
+<a href="https://t.me/masterpredict258">
+    <img src="image/round.png" alt="" style="height: 100%; width: 100%;">
+</a>
+</div>
+</main>
+
+
+<!-- ================= BET SLIP ================= -->
+
+<!-- <aside class="betslip">
+
+    <div class="betslip-header">
+
+        <h2>🎟 Bet Slip</h2>
+
+        <span id="betCount">
+            0
+        </span>
+
+    </div>
+
+
+    <div id="betItems">
+
+        <div class="empty-slip">
+
+            <div>
+                🎟️
+            </div>
+
+            <p>
+                Your bet slip is empty
+            </p>
+
+            <small>
+                Select an odd to add a bet
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="bet-summary">
+
+        <div>
+            <span>Total Odds</span>
+
+            <strong id="totalOdds">
+                0.00
+            </strong>
+        </div>
+
+
+        <label>
+            Stake
+        </label>
+
+        <input
+            id="stake"
+            type="number"
+            min="0"
+            placeholder="₦ Enter amount"
+            oninput="calculateWin()">
+
+
+        <div>
+
+            <span>Potential Win</span>
+
+            <strong class="green">
+                ₦<span id="potentialWin">
+                    0.00
+                </span>
+            </strong>
+
+        </div>
+
+
+        <button
+            class="place-btn"
+            onclick="placeBet()">
+
+            PLACE BET
+
+        </button>
+
+    </div>
+
+</aside> -->
+
+
+<!-- ================= MOBILE NAV ================= -->
+
+<div class="mobile-nav">
+
+    <a href="#home">
+        🏠
+        <small>Home</small>
+    </a>
+
+    <a href="#live">
+        🔴
+        <small>Live</small>
+    </a>
+
+    <a href="#matches">
+        ⚽
+        <small>Football</small>
+    </a>
+
+    <a href="file:///C:/Users/USER/Documents/Dashbord/home.html#dashboard">
+        👤
+        <small>Admin</small>
+    </a>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

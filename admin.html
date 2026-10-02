@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>BetZone Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        ⚽ <span>Master</span>PredictAdmin
+    </div>
+
+    <a
+        href="index.html"
+        style="
+            color:#19df70;
+            text-decoration:none;
+        ">
+
+        ← Betting Site
+
+    </a>
+
+</header>
+
+
+<main>
+
+    <div class="page-title">
+
+        <h2>
+            Admin Dashboard
+        </h2>
+
+        <p>
+            Manage your demo betting site
+        </p>
+
+    </div>
+
+
+    <div class="match-list">
+
+        <div class="match-card">
+
+            <div class="match-body">
+
+                <h2>
+                    👥 Users
+                </h2>
+
+                <br>
+
+                <strong
+                    style="
+                        color:#19df70;
+                        font-size:30px;
+                    ">
+
+                    12,846
+
+                </strong>
+
+                <p>
+                    Registered users
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-card">
+
+            <div class="match-body">
+
+                <h2>
+                    💰 Deposits
+                </h2>
+
+                <br>
+
+                <strong
+                    style="
+                        color:#19df70;
+                        font-size:30px;
+                    ">
+
+                    ₦48.2M
+
+                </strong>
+
+                <p>
+                    Demo deposits
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-card">
+
+            <div class="match-body">
+
+                <h2>
+                    🎟 Bets
+                </h2>
+
+                <br>
+
+                <strong
+                    style="
+                        color:#19df70;
+                        font-size:30px;
+                    ">
+
+                    3,482
+
+                </strong>
+
+                <p>
+                    Demo bets
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-card">
+
+            <div class="match-body">
+
+                <h2>
+                    💸 Withdrawals
+                </h2>
+
+                <br>
+
+                <strong
+                    style="
+                        color:#19df70;
+                        font-size:30px;
+                    ">
+
+                    48
+
+                </strong>
+
+                <p>
+                    Pending requests
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <section>
+
+        <h3>
+            ⚽ Match Management
+        </h3>
+
+        <div
+            id="adminMatches"
+            class="match-list">
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+const matches = [
+
+    {
+        league: "Premier League",
+        home: "Manchester City",
+        away: "Arsenal",
+        status: "🔴 LIVE"
+    },
+
+    {
+        league: "La Liga",
+        home: "Real Madrid",
+        away: "Barcelona",
+        status: "🟢 UPCOMING"
+    },
+
+    {
+        league: "Serie A",
+        home: "AC Milan",
+        away: "Juventus",
+        status: "🟢 UPCOMING"
+    }
+
+];
+
+
+const container =
+    document.getElementById(
+        "adminMatches"
+    );
+
+
+matches.forEach(match => {
+
+    container.innerHTML += `
+
+        <div class="match-card">
+
+            <div class="match-header">
+
+                <span>
+                    ${match.league}
+                </span>
+
+                <span>
+                    ${match.status}
+                </span>
+
+            </div>
+
+            <div class="match-body">
+
+                <strong>
+                    ${match.home}
+                    vs
+                    ${match.away}
+                </strong>
+
+                <br><br>
+
+                <button
+                    class="primary-btn"
+                    onclick="
+                        alert(
+                            'Demo: betting market updated'
+                        )
+                    ">
+
+                    Manage Match
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+});
+
+</script>
+
+</body>
+</html>

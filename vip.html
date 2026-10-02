@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>GoalBet VIP</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f5f7;
+      color: #17202a;
+    }
+
+    header {
+      background: #071d35;
+      color: white;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #22c55e;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: #22c55e;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 35px auto;
+    }
+
+    .hero {
+      background:
+        linear-gradient(
+          rgba(7,29,53,.90),
+          rgba(7,29,53,.90)
+        ),
+        url("https://images.unsplash.com/photo-1511512578047-dfb367046420")
+        center/cover;
+
+      color: white;
+      padding: 65px 30px;
+      text-align: center;
+      border-radius: 15px;
+    }
+
+    .vip-badge {
+      display: inline-block;
+      background: #f5c542;
+      color: #352600;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #d6e2ef;
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+
+    /* VIP CARDS */
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tier {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      position: relative;
+    }
+
+    .tier.featured {
+      border-color: #f5c542;
+    }
+
+    .popular {
+      position: absolute;
+      right: 15px;
+      top: -13px;
+      background: #f5c542;
+      color: #352600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .tier h3 {
+      font-size: 25px;
+    }
+
+    .price {
+      font-size: 27px;
+      color: #16a34a;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .tier ul {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .tier li {
+      margin: 10px 0;
+      color: #475569;
+    }
+
+    .join-btn {
+      width: 100%;
+      border: none;
+      padding: 13px;
+      border-radius: 7px;
+      background: #071d35;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .featured .join-btn {
+      background: #f5c542;
+      color: #352600;
+    }
+
+    /* PAYMENT MODAL */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      padding: 28px;
+      border-radius: 12px;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .modal-box p {
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7dde4;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .amount-display {
+      background: #eefbf2;
+      border: 1px solid #bbf7d0;
+      padding: 15px;
+      border-radius: 7px;
+      margin: 15px 0;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .modal-buttons button {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cancel {
+      background: #e2e8f0;
+    }
+
+    .continue {
+      background: #22c55e;
+    }
+
+    /* AI */
+
+    .ai-section {
+      margin-top: 45px;
+      background: #071d35;
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .ai-header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .ai-icon {
+      width: 45px;
+      height: 45px;
+      background: #22c55e;
+      color: #061b12;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+
+    .ai-section > p {
+      color: #cbd8e5;
+      margin: 15px 0;
+    }
+
+    .quick-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .quick-buttons button {
+      background: #173b5c;
+      border: 1px solid #41617d;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .chat {
+      height: 300px;
+      overflow-y: auto;
+      background: #f8fafc;
+      color: #17202a;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 10px 13px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .ai-message {
+      background: #e2e8f0;
+    }
+
+    .user-message {
+      background: #dcfce7;
+      margin-left: auto;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 7px;
+    }
+
+    .chat-input button {
+      background: #22c55e;
+      border: none;
+      padding: 0 20px;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* TERMS */
+
+    .terms {
+      background: white;
+      padding: 25px;
+      margin-top: 40px;
+      border-radius: 10px;
+    }
+
+    .terms ul {
+      margin: 15px 0 0 20px;
+    }
+
+    .terms li {
+      margin: 10px 0;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .warning {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 15px;
+      margin-top: 20px;
+      color: #7c2d12;
+      line-height: 1.5;
+    }
+
+    @media(max-width: 850px) {
+      .tiers {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width: 600px) {
+      header {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    ⚽ GoalBet
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html">Sports</a>
+    <a href="vip.html">VIP</a>
+    <a href="setting.html">Settings</a>
+    <a href="loging.html">GoalBet - Login</a>
+  </nav>
+
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="vip-badge">
+      ⭐ GOALBET VIP
+    </div>
+
+    <h1>
+      Get VIP Membership
+    </h1>
+
+    <p>
+      Choose your VIP level, select your preferred currency,
+      review the required amount and continue through the
+      demo enrollment process.
+    </p>
+
+  </section>
+
+
+  <!-- VIP LEVELS -->
+
+  <h2 class="section-title">
+    Choose Your VIP Level
+  </h2>
+
+
+  <section class="tiers">
+
+
+    <!-- SILVER -->
+
+    <div class="tier">
+
+      <h3>VIP Silver</h3>
+
+      <p>
+        Entry-level VIP membership.
+      </p>
+
+      <div class="price">
+        $25 / ₦40,000
+      </div>
+
+      <ul>
+        <li>✓ VIP dashboard</li>
+        <li>✓ VIP support</li>
+        <li>✓ Eligible VIP offers</li>
+        <li>✓ VIP AI assistant</li>
+      </ul>
+
+      <button
+        class="join-btn"
+        onclick="openVIP('Silver')"
+      >
+        Join VIP Silver
+      </button>
+
+    </div>
+
+
+    <!-- GOLD -->
+
+    <div class="tier featured">
+
+      <span class="popular">
+        POPULAR
+      </span>
+
+      <h3>VIP Gold</h3>
+
+      <p>
+        Enhanced VIP membership.
+      </p>
+
+      <div class="price">
+        $50 / ₦80,000
+      </div>
+
+      <ul>
+        <li>✓ Everything in Silver</li>
+        <li>✓ Enhanced VIP support</li>
+        <li>✓ Additional eligible offers</li>
+        <li>✓ VIP account assistance</li>
+      </ul>
+
+      <button
+        class="join-btn"
+        onclick="openVIP('Gold')"
+      >
+        Join VIP Gold
+      </button>
+
+    </div>
+
+
+    <!-- PLATINUM -->
+
+    <div class="tier">
+
+      <h3>VIP Platinum</h3>
+
+      <p>
+        Highest demo VIP level.
+      </p>
+
+      <div class="price">
+        $100 / ₦160,000
+      </div>
+
+      <ul>
+        <li>✓ Everything in Gold</li>
+        <li>✓ Priority VIP support</li>
+        <li>✓ Platinum dashboard</li>
+        <li>✓ Eligible Platinum offers</li>
+      </ul>
+
+      <button
+        class="join-btn"
+        onclick="openVIP('Platinum')"
+      >
+        Join VIP Platinum
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- AI -->
+
+  <section class="ai-section">
+
+    <div class="ai-header">
+
+      <div class="ai-icon">
+        🤖
+      </div>
+
+      <div>
+        <h2>GoalBet VIP AI</h2>
+        <small>VIP Help & Account Safety</small>
+      </div>
+
+    </div>
+
+
+    <p>
+      Ask the AI how to join VIP, how much each VIP level
+      costs, which currency you can use, what benefits are
+      available, or what happens if the VIP Terms & Conditions
+      are violated.
+    </p>
+
+
+    <div class="quick-buttons">
+
+      <button onclick="askAI('How do I join VIP?')">
+        How do I join?
+      </button>
+
+      <button onclick="askAI('How much is VIP Gold?')">
+        Gold price
+      </button>
+
+      <button onclick="askAI('Can I pay in naira?')">
+        Pay in Naira
+      </button>
+
+      <button onclick="askAI('Can I pay in dollars?')">
+        Pay in dollars
+      </button>
+
+      <button onclick="askAI('What happens if I break the VIP rules?')">
+        VIP rules
+      </button>
+
+    </div>
+
+
+    <div class="chat" id="chat">
+
+      <div class="message ai-message">
+        👋 Hello! I'm the GoalBet VIP AI Assistant.
+        Ask me about VIP membership, prices, currencies,
+        benefits, or the VIP Terms & Conditions.
+      </div>
+
+    </div>
+
+
+    <div class="chat-input">
+
+      <input
+        id="aiInput"
+        type="text"
+        placeholder="Ask about VIP..."
+        onkeydown="handleAIKey(event)"
+      >
+
+      <button onclick="sendAI()">
+        Send
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- TERMS -->
+
+  <section class="terms">
+
+    <h2>
+      VIP Terms & Conditions
+    </h2>
+
+    <ul>
+
+      <li>
+        Users must meet the eligibility requirements
+        applicable to the selected VIP level.
+      </li>
+
+      <li>
+        Users must provide accurate account information.
+      </li>
+
+      <li>
+        VIP benefits and offers are subject to their
+        applicable terms.
+      </li>
+
+      <li>
+        Fraudulent activity, account abuse or attempts
+        to circumvent site rules may result in an account
+        being flagged for review.
+      </li>
+
+      <li>
+        Restrictions should be applied according to the
+        site's documented rules and review process.
+      </li>
+
+    </ul>
+
+
+    <div class="warning">
+
+      <strong>Important:</strong>
+
+      The amounts displayed on this demo page are
+      example VIP prices. A production site should
+      obtain current prices and exchange rates from
+      its server rather than trusting browser JavaScript.
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- VIP PAYMENT / JOIN MODAL -->
+
+<div class="modal" id="vipModal">
+
+  <div class="modal-box">
+
+    <h2 id="modalTitle">
+      Join VIP
+    </h2>
+
+    <p>
+      Select your payment currency. The amount required
+      will automatically change according to the VIP level
+      you selected.
+    </p>
+
+
+    <div class="field">
+
+      <label>
+        VIP Level
+      </label>
+
+      <input
+        id="selectedVIP"
+        type="text"
+        readonly
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Payment Currency
+      </label>
+
+      <select
+        id="currency"
+        onchange="updateAmount()"
+      >
+
+        <option value="NGN">
+          Nigerian Naira (₦)
+        </option>
+
+        <option value="USD">
+          US Dollar ($)
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="amount-display">
+
+      <strong>
+        Amount Required
+      </strong>
+
+      <h2 id="amount">
+        ₦40,000
+      </h2>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Terms & Conditions
+      </label>
+
+      <label style="font-weight:normal">
+
+        <input
+          type="checkbox"
+          id="agreeTerms"
+        >
+
+        I have read and agree to the VIP Terms &
+        Conditions.
+
+      </label>
+
+    </div>
+
+
+    <div class="modal-buttons">
+
+      <button
+        class="cancel"
+        onclick="closeVIP()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="continue"
+        onclick="continueVIP()"
+      >
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/*
+================================================
+VIP PRICES
+================================================
+
+These are DEMO prices.
+
+For a real application, retrieve these from
+your backend instead of trusting client-side
+JavaScript.
+*/
+
+const vipPrices = {
+
+  Silver: {
+    USD: 25,
+    NGN: 40000
+  },
+
+  Gold: {
+    USD: 50,
+    NGN: 80000
+  },
+
+  Platinum: {
+    USD: 100,
+    NGN: 160000
+  }
+
+};
+
+
+let selectedVIP = "Silver";
+
+
+/*
+================================================
+OPEN VIP MODAL
+================================================
+*/
+
+function openVIP(level) {
+
+  selectedVIP = level;
+
+  document.getElementById(
+    "selectedVIP"
+  ).value = level;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).innerText =
+    `Join VIP ${level}`;
+
+
+  document.getElementById(
+    "agreeTerms"
+  ).checked = false;
+
+
+  updateAmount();
+
+
+  document.getElementById(
+    "vipModal"
+  ).style.display = "flex";
+
+}
+
+
+/*
+================================================
+CLOSE VIP MODAL
+================================================
+*/
+
+function closeVIP() {
+
+  document.getElementById(
+    "vipModal"
+  ).style.display = "none";
+
+}
+
+
+/*
+================================================
+UPDATE AMOUNT
+================================================
+*/
+
+function updateAmount() {
+
+  const currency =
+    document.getElementById(
+      "currency"
+    ).value;
+
+
+  const price =
+    vipPrices[selectedVIP][currency];
+
+
+  let formatted;
+
+
+  if (currency === "USD") {
+
+    formatted =
+      "$" +
+      price.toLocaleString();
+
+  } else {
+
+    formatted =
+      "₦" +
+      price.toLocaleString();
+
+  }
+
+
+  document.getElementById(
+    "amount"
+  ).innerText = formatted;
+
+}
+
+
+/*
+================================================
+CONTINUE VIP
+================================================
+*/
+
+function continueVIP() {
+
+  const agreed =
+    document.getElementById(
+      "agreeTerms"
+    ).checked;
+
+
+  if (!agreed) {
+
+    alert(
+      "Please read and agree to the VIP Terms & Conditions before continuing."
+    );
+
+    return;
+
+  }
+
+
+  const currency =
+    document.getElementById(
+      "currency"
+    ).value;
+
+
+  const amount =
+    vipPrices[selectedVIP][currency];
+
+
+  const formatted =
+    currency === "USD"
+      ? "$" + amount.toLocaleString()
+      : "₦" + amount.toLocaleString();
+
+
+  closeVIP();
+
+
+  /*
+    DEMO ONLY.
+
+    Do NOT collect card/bank credentials
+    directly in browser JavaScript.
+
+    In production, create a payment session
+    on your server and redirect to an approved
+    payment provider.
+  */
+
+  alert(
+    `VIP ${selectedVIP} selected.\n\n` +
+    `Amount: ${formatted}\n\n` +
+    `Demo enrollment request created.\n\n` +
+    `A production site would now create a secure payment session on the server.`
+  );
+
+}
+
+
+/*
+================================================
+AI KNOWLEDGE
+================================================
+*/
+
+const vipAI = [
+
+  {
+    keywords: [
+      "join vip",
+      "how do i join",
+      "join",
+      "become vip"
+    ],
+
+    answer:
+      "To join VIP, select Silver, Gold or Platinum. Then choose whether you want the displayed amount in Nigerian Naira (₦) or US Dollars ($), review the amount, accept the VIP Terms & Conditions and continue. In a real system, your account eligibility would then be checked before a secure payment session is created."
+  },
+
+
+  {
+    keywords: [
+      "price",
+      "cost",
+      "how much",
+      "amount"
+    ],
+
+    answer:
+      "The demo VIP prices are Silver: $25 / ₦40,000, Gold: $50 / ₦80,000, and Platinum: $100 / ₦160,000."
+  },
+
+
+  {
+    keywords: [
+      "naira",
+      "ngn",
+      "₦"
+    ],
+
+    answer:
+      "Yes. The demo VIP enrollment allows you to select Nigerian Naira (₦). The example amounts are Silver ₦40,000, Gold ₦80,000 and Platinum ₦160,000."
+  },
+
+
+  {
+    keywords: [
+      "dollar",
+      "dollars",
+      "usd",
+      "$"
+    ],
+
+    answer:
+      "Yes. The demo VIP enrollment allows you to select US Dollars ($). The example amounts are Silver $25, Gold $50 and Platinum $100."
+  },
+
+
+  {
+    keywords: [
+      "silver"
+    ],
+
+    answer:
+      "VIP Silver costs $25 / ₦40,000 in this demo and includes the VIP dashboard, VIP support, eligible VIP offers and the VIP AI assistant."
+  },
+
+
+  {
+    keywords: [
+      "gold"
+    ],
+
+    answer:
+      "VIP Gold costs $50 / ₦80,000 in this demo and includes the Silver benefits plus enhanced VIP support and additional eligible offers."
+  },
+
+
+  {
+    keywords: [
+      "platinum"
+    ],
+
+    answer:
+      "VIP Platinum costs $100 / ₦160,000 in this demo and includes the Gold benefits plus priority VIP support and the Platinum dashboard."
+  },
+
+
+  {
+    keywords: [
+      "benefit",
+      "benefits"
+    ],
+
+    answer:
+      "VIP benefits vary by level. The demo provides a VIP dashboard, VIP support, eligible offers and VIP account assistance. Always check the current VIP Terms & Conditions for the actual benefits."
+  },
+
+
+  {
+    keywords: [
+      "rules",
+      "terms",
+      "terms and conditions"
+    ],
+
+    answer:
+      "VIP members must follow the site's Terms & Conditions, provide accurate information, avoid fraudulent activity and comply with applicable VIP promotion rules."
+  },
+
+
+  {
+    keywords: [
+      "suspend",
+      "suspension",
+      "restricted",
+      "restriction",
+      "violation",
+      "break the rules"
+    ],
+
+    answer:
+      "If a potential VIP Terms & Conditions violation is detected, the account can be flagged by the safety system. A production system should record the specific rule involved and use the documented review/restriction process. I can explain the rule and status, but account restrictions should be enforced by the server-side safety system rather than an AI making an arbitrary decision."
+  },
+
+
+  {
+    keywords: [
+      "hello",
+      "hi",
+      "hey"
+    ],
+
+    answer:
+      "Hello! I can explain how to join VIP, VIP prices, payment currencies, benefits, eligibility and the VIP Terms & Conditions."
+  }
+
+];
+
+
+/*
+================================================
+GET AI RESPONSE
+================================================
+*/
+
+function getAIResponse(question) {
+
+  const text =
+    question.toLowerCase();
+
+
+  for (const item of vipAI) {
+
+    for (const keyword of item.keywords) {
+
+      if (text.includes(keyword)) {
+
+        return item.answer;
+
+      }
+
+    }
+
+  }
+
+
+  return `
+    I can help you with:
+    
+    • How to join VIP
+    • Silver, Gold and Platinum prices
+    • Paying in Naira or Dollars
+    • VIP benefits
+    • VIP eligibility
+    • VIP Terms & Conditions
+    • Account safety and restrictions
+  `;
+
+}
+
+
+/*
+================================================
+SEND AI MESSAGE
+================================================
+*/
+
+function sendAI() {
+
+  const input =
+    document.getElementById(
+      "aiInput"
+    );
+
+
+  const question =
+    input.value.trim();
+
+
+  if (!question) return;
+
+
+  addMessage(
+    question,
+    "user-message"
+  );
+
+
+  input.value = "";
+
+
+  setTimeout(() => {
+
+    const response =
+      getAIResponse(question);
+
+
+    addMessage(
+      response,
+      "ai-message"
+    );
+
+  }, 500);
+
+}
+
+
+/*
+================================================
+QUICK AI QUESTION
+================================================
+*/
+
+function askAI(question) {
+
+  document.getElementById(
+    "aiInput"
+  ).value = question;
+
+
+  sendAI();
+
+}
+
+
+/*
+================================================
+ADD CHAT MESSAGE
+================================================
+*/
+
+function addMessage(
+  message,
+  className
+) {
+
+  const chat =
+    document.getElementById(
+      "chat"
+    );
+
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    `message ${className}`;
+
+
+  div.innerText =
+    message;
+
+
+  chat.appendChild(div);
+
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+}
+
+
+/*
+================================================
+ENTER KEY
+================================================
+*/
+
+function handleAIKey(event) {
+
+  if (event.key === "Enter") {
+
+    sendAI();
+
+  }
+
+}
+
+
+/*
+================================================
+CLOSE MODAL OUTSIDE
+================================================
+*/
+
+window.onclick = function(event) {
+
+  const modal =
+    document.getElementById(
+      "vipModal"
+    );
+
+
+  if (event.target === modal) {
+
+    closeVIP();
+
+  }
+
+};
+
+</script>
+
+</body>
+</html>

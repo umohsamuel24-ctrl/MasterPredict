@@ -1,0 +1,1496 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>GoalBet - Login</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: #f4f7f6;
+      color: #17202a;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: #071d35;
+      color: white;
+      padding: 16px 5%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .logo {
+      color: #22c55e;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+
+    nav a:hover {
+      color: #22c55e;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      min-height: calc(100vh - 120px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 35px 20px;
+    }
+
+
+    .login-card {
+      width: 100%;
+      max-width: 450px;
+
+      background: white;
+
+      padding: 32px;
+
+      border-radius: 15px;
+
+      box-shadow:
+        0 8px 30px rgba(0,0,0,.10);
+    }
+
+
+    .login-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+
+    .login-title h1 {
+      margin-bottom: 8px;
+    }
+
+
+    .login-title p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       MESSAGES
+    ========================= */
+
+    .message {
+      display: none;
+
+      padding: 12px;
+
+      border-radius: 7px;
+
+      margin-bottom: 18px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+
+    .info {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+
+    label {
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      margin-bottom: 7px;
+    }
+
+
+    input {
+      width: 100%;
+
+      padding: 13px;
+
+      border: 1px solid #d7dde4;
+
+      border-radius: 7px;
+
+      font-size: 14px;
+
+      outline: none;
+    }
+
+
+    input:focus {
+      border-color: #22c55e;
+    }
+
+
+    /* =========================
+       PASSWORD FIELD
+    ========================= */
+
+    .password-box {
+      position: relative;
+    }
+
+
+    .password-box input {
+      padding-right: 75px;
+    }
+
+
+    .show-password {
+      position: absolute;
+
+      right: 10px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: none;
+
+      background: transparent;
+
+      color: #16a34a;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .main-btn {
+      width: 100%;
+
+      padding: 14px;
+
+      border: none;
+
+      border-radius: 7px;
+
+      background: #22c55e;
+
+      color: #061b12;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+
+    .main-btn:hover {
+      background: #16a34a;
+    }
+
+
+    /* =========================
+       LINKS
+    ========================= */
+
+    .forgot-password {
+      text-align: right;
+
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+
+    .forgot-password button {
+      border: none;
+
+      background: transparent;
+
+      color: #16a34a;
+
+      font-size: 13px;
+
+      cursor: pointer;
+    }
+
+
+    .forgot-password button:hover {
+      text-decoration: underline;
+    }
+
+
+    .signup {
+      text-align: center;
+
+      margin-top: 22px;
+
+      color: #64748b;
+
+      font-size: 14px;
+    }
+
+
+    .signup a {
+      color: #16a34a;
+
+      font-weight: bold;
+
+      text-decoration: none;
+    }
+
+
+    /* =========================
+       RESET PASSWORD
+    ========================= */
+
+    #resetSection {
+      display: none;
+    }
+
+
+    .back-login {
+      margin-top: 15px;
+
+      text-align: center;
+    }
+
+
+    .back-login button {
+      border: none;
+
+      background: transparent;
+
+      color: #16a34a;
+
+      cursor: pointer;
+
+      font-weight: bold;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #071d35;
+
+      color: #9fb0c0;
+
+      text-align: center;
+
+      padding: 18px;
+
+      font-size: 12px;
+    }
+
+
+    @media(max-width: 600px) {
+
+      nav {
+        display: none;
+      }
+
+      .login-card {
+        padding: 25px 20px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <div class="logo">
+    ⚽ GoalBet
+  </div>
+
+
+  <nav>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="vip.html">
+      VIP
+    </a>
+
+    <a href="create-account.html">
+      Create Account
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+
+  <div class="login-card">
+
+
+    <!-- =====================
+         LOGIN SECTION
+    ====================== -->
+
+    <section id="loginSection">
+
+
+      <div class="login-title">
+
+        <h1>
+          Welcome Back
+        </h1>
+
+        <p>
+          Login to your GoalBet account.
+        </p>
+
+      </div>
+
+
+      <!-- ERROR -->
+
+      <div
+        id="loginError"
+        class="message error"
+      ></div>
+
+
+      <!-- SUCCESS -->
+
+      <div
+        id="loginSuccess"
+        class="message success"
+      ></div>
+
+
+      <form
+        onsubmit="login(event)"
+      >
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="loginEmail">
+            Email Address
+          </label>
+
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="loginPassword">
+            Password
+          </label>
+
+
+          <div class="password-box">
+
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+
+            <button
+              type="button"
+              class="show-password"
+              onclick="togglePassword()"
+            >
+              Show
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <div class="forgot-password">
+
+          <button
+            type="button"
+            onclick="showReset()"
+          >
+            Forgot Password?
+          </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <button
+          type="submit"
+          class="main-btn"
+        >
+          Login
+        </button>
+
+
+      </form>
+
+
+      <div class="signup">
+
+        Don't have an account?
+
+        <a href="creataccount.html">
+          Create Account
+        </a>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================
+         RESET SECTION
+    ====================== -->
+
+    <section id="resetSection">
+
+
+      <div class="login-title">
+
+        <h1>
+          Reset Password
+        </h1>
+
+        <p>
+          Enter your account email to receive a verification code.
+        </p>
+
+      </div>
+
+
+      <div
+        id="resetError"
+        class="message error"
+      ></div>
+
+
+      <div
+        id="resetInfo"
+        class="message info"
+      ></div>
+
+
+      <div
+        id="resetSuccess"
+        class="message success"
+      ></div>
+
+
+      <!-- STEP 1 -->
+
+      <div id="emailStep">
+
+        <div class="form-group">
+
+          <label for="resetEmail">
+            Account Email
+          </label>
+
+          <input
+            id="resetEmail"
+            type="email"
+            placeholder="Enter your signup email"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="main-btn"
+          onclick="sendResetCode()"
+        >
+          Get Verification Code
+        </button>
+
+      </div>
+
+
+      <!-- STEP 2 -->
+
+      <div
+        id="codeStep"
+        style="display:none;"
+      >
+
+        <div class="form-group">
+
+          <label for="verificationCode">
+            Verification Code
+          </label>
+
+          <input
+            id="verificationCode"
+            type="text"
+            maxlength="6"
+            placeholder="Enter 6-digit code"
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="main-btn"
+          onclick="verifyCode()"
+        >
+          Verify Code
+        </button>
+
+      </div>
+
+
+      <!-- STEP 3 -->
+
+      <div
+        id="newPasswordStep"
+        style="display:none;"
+      >
+
+        <div class="form-group">
+
+          <label for="newPassword">
+            New Password
+          </label>
+
+          <input
+            id="newPassword"
+            type="password"
+            placeholder="Enter new password"
+            minlength="8"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="confirmNewPassword">
+            Confirm New Password
+          </label>
+
+          <input
+            id="confirmNewPassword"
+            type="password"
+            placeholder="Confirm new password"
+            minlength="8"
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="main-btn"
+          onclick="changePassword()"
+        >
+          Change Password
+        </button>
+
+      </div>
+
+
+      <div class="back-login">
+
+        <button
+          type="button"
+          onclick="showLogin()"
+        >
+          ← Back to Login
+        </button>
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+</main>
+
+
+
+<footer>
+
+  © 2026 GoalBet · 18+ · Play responsibly
+
+</footer>
+
+
+
+<script>
+
+
+/*
+==================================================
+GET SAVED ACCOUNT
+==================================================
+*/
+
+function getAccount() {
+
+  const savedAccount =
+    localStorage.getItem(
+      "goalbetAccount"
+    );
+
+
+  if (!savedAccount) {
+    return null;
+  }
+
+
+  try {
+
+    return JSON.parse(
+      savedAccount
+    );
+
+  } catch {
+
+    return null;
+
+  }
+
+}
+
+
+
+/*
+==================================================
+LOGIN
+==================================================
+*/
+
+function login(event) {
+
+  event.preventDefault();
+
+
+  clearMessages();
+
+
+  const email =
+    document.getElementById(
+      "loginEmail"
+    ).value.trim().toLowerCase();
+
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+
+  const account =
+    getAccount();
+
+
+  /*
+  NO ACCOUNT
+  */
+
+  if (!account) {
+
+    showLoginError(
+      "No account was found. Please create an account first."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  CHECK EMAIL
+  */
+
+  if (
+    email !==
+    account.email.toLowerCase()
+  ) {
+
+    showLoginError(
+      "The email address does not match the email used when you created your account."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  CHECK PASSWORD
+  */
+
+  if (
+    password !==
+    account.password
+  ) {
+
+    showLoginError(
+      "The password is incorrect. Please try again or use Forgot Password."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  LOGIN SUCCESS
+  */
+
+  sessionStorage.setItem(
+    "goalbetLoggedIn",
+    "true"
+  );
+
+
+  sessionStorage.setItem(
+    "goalbetLoginTime",
+    new Date().toISOString()
+  );
+
+
+  showLoginSuccess(
+    "Login successful. Taking you to the home page..."
+  );
+
+
+  /*
+  GO HOME
+  */
+
+  setTimeout(function() {
+
+    window.location.href =
+      "index.html";
+
+  }, 800);
+
+}
+
+
+
+/*
+==================================================
+SHOW LOGIN ERROR
+==================================================
+*/
+
+function showLoginError(message) {
+
+  const element =
+    document.getElementById(
+      "loginError"
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+
+/*
+==================================================
+SHOW LOGIN SUCCESS
+==================================================
+*/
+
+function showLoginSuccess(message) {
+
+  const element =
+    document.getElementById(
+      "loginSuccess"
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+
+/*
+==================================================
+TOGGLE PASSWORD
+==================================================
+*/
+
+function togglePassword() {
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    );
+
+
+  const button =
+    document.querySelector(
+      ".show-password"
+    );
+
+
+  if (
+    password.type ===
+    "password"
+  ) {
+
+    password.type =
+      "text";
+
+    button.textContent =
+      "Hide";
+
+  } else {
+
+    password.type =
+      "password";
+
+    button.textContent =
+      "Show";
+
+  }
+
+}
+
+
+
+/*
+==================================================
+SHOW RESET PASSWORD PAGE
+==================================================
+*/
+
+function showReset() {
+
+  document.getElementById(
+    "loginSection"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "resetSection"
+  ).style.display =
+    "block";
+
+
+  clearResetMessages();
+
+}
+
+
+
+/*
+==================================================
+BACK TO LOGIN
+==================================================
+*/
+
+function showLogin() {
+
+  document.getElementById(
+    "resetSection"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "loginSection"
+  ).style.display =
+    "block";
+
+
+  clearMessages();
+
+}
+
+
+
+/*
+==================================================
+SEND RESET CODE
+==================================================
+*/
+
+function sendResetCode() {
+
+  clearResetMessages();
+
+
+  const email =
+    document.getElementById(
+      "resetEmail"
+    ).value.trim().toLowerCase();
+
+
+  const account =
+    getAccount();
+
+
+  /*
+  CHECK ACCOUNT
+  */
+
+  if (!account) {
+
+    showResetError(
+      "No GoalBet account exists yet. Please create an account first."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  CHECK EMAIL
+  */
+
+  if (
+    email !==
+    account.email.toLowerCase()
+  ) {
+
+    showResetError(
+      "This email does not match the email used when the account was created."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  DEMO VERIFICATION CODE
+  */
+
+  const code =
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    ).toString();
+
+
+  /*
+  Save temporary reset information.
+  */
+
+  sessionStorage.setItem(
+    "goalbetResetEmail",
+    email
+  );
+
+
+  sessionStorage.setItem(
+    "goalbetResetCode",
+    code
+  );
+
+
+  /*
+  DEMO ONLY:
+  Show the code on screen.
+
+  In a real application, the code
+  must be sent through a secure
+  backend email/SMS service.
+  */
+
+  showResetInfo(
+    "Demo verification code: " +
+    code +
+    ". In a real website, this code would be sent to your email or phone."
+  );
+
+
+  /*
+  SHOW CODE STEP
+  */
+
+  document.getElementById(
+    "emailStep"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "codeStep"
+  ).style.display =
+    "block";
+
+}
+
+
+
+/*
+==================================================
+VERIFY CODE
+==================================================
+*/
+
+function verifyCode() {
+
+  clearResetMessages();
+
+
+  const enteredCode =
+    document.getElementById(
+      "verificationCode"
+    ).value.trim();
+
+
+  const savedCode =
+    sessionStorage.getItem(
+      "goalbetResetCode"
+    );
+
+
+  if (!savedCode) {
+
+    showResetError(
+      "Your verification code has expired. Please request a new code."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    enteredCode !==
+    savedCode
+  ) {
+
+    showResetError(
+      "The verification code is incorrect."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  CODE IS CORRECT
+  */
+
+  document.getElementById(
+    "codeStep"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "newPasswordStep"
+  ).style.display =
+    "block";
+
+
+  showResetSuccess(
+    "Code verified. You can now create a new password."
+  );
+
+}
+
+
+
+/*
+==================================================
+CHANGE PASSWORD
+==================================================
+*/
+
+function changePassword() {
+
+  clearResetMessages();
+
+
+  const newPassword =
+    document.getElementById(
+      "newPassword"
+    ).value;
+
+
+  const confirmPassword =
+    document.getElementById(
+      "confirmNewPassword"
+    ).value;
+
+
+  /*
+  PASSWORD LENGTH
+  */
+
+  if (
+    newPassword.length <
+    8
+  ) {
+
+    showResetError(
+      "Your new password must contain at least 8 characters."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  PASSWORD MATCH
+  */
+
+  if (
+    newPassword !==
+    confirmPassword
+  ) {
+
+    showResetError(
+      "The new passwords do not match."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  GET ACCOUNT
+  */
+
+  const account =
+    getAccount();
+
+
+  if (!account) {
+
+    showResetError(
+      "Account could not be found."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  SAVE NEW PASSWORD
+  */
+
+  account.password =
+    newPassword;
+
+
+  localStorage.setItem(
+    "goalbetAccount",
+    JSON.stringify(account)
+  );
+
+
+  /*
+  CLEAR RESET DATA
+  */
+
+  sessionStorage.removeItem(
+    "goalbetResetCode"
+  );
+
+
+  sessionStorage.removeItem(
+    "goalbetResetEmail"
+  );
+
+
+  /*
+  SUCCESS
+  */
+
+  showResetSuccess(
+    "Password changed successfully. You can now login with your new password."
+  );
+
+
+  /*
+  RETURN TO LOGIN
+  */
+
+  setTimeout(function() {
+
+    showLogin();
+
+    document.getElementById(
+      "loginEmail"
+    ).value =
+      account.email;
+
+
+    document.getElementById(
+      "loginPassword"
+    ).value =
+      "";
+
+  }, 1200);
+
+}
+
+
+
+/*
+==================================================
+CLEAR LOGIN MESSAGES
+==================================================
+*/
+
+function clearMessages() {
+
+  document.getElementById(
+    "loginError"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "loginSuccess"
+  ).style.display =
+    "none";
+
+}
+
+
+
+/*
+==================================================
+CLEAR RESET MESSAGES
+==================================================
+*/
+
+function clearResetMessages() {
+
+  document.getElementById(
+    "resetError"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "resetInfo"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "resetSuccess"
+  ).style.display =
+    "none";
+
+}
+
+
+
+/*
+==================================================
+RESET ERROR
+==================================================
+*/
+
+function showResetError(message) {
+
+  const element =
+    document.getElementById(
+      "resetError"
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+
+/*
+==================================================
+RESET INFO
+==================================================
+*/
+
+function showResetInfo(message) {
+
+  const element =
+    document.getElementById(
+      "resetInfo"
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+
+/*
+==================================================
+RESET SUCCESS
+==================================================
+*/
+
+function showResetSuccess(message) {
+
+  const element =
+    document.getElementById(
+      "resetSuccess"
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+</script>
+
+</body>
+
+</html>

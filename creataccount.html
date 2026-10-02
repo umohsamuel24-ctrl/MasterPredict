@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoalBet - Create Account</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: #f4f7f6;
+      color: #17202a;
+    }
+
+    header {
+      background: #071d35;
+      color: white;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: #22c55e;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #22c55e;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 32px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
+
+    .profile-upload {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .profile-preview {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin: auto;
+      background: #e2e8f0;
+      border: 4px solid #22c55e;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 45px;
+    }
+
+    .profile-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .upload-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: #071d35;
+      color: white;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    #profilePicture {
+      display: none;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7dde4;
+      border-radius: 7px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #22c55e;
+    }
+
+    .terms {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin: 18px 0;
+      color: #475569;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .terms input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .terms a {
+      color: #16a34a;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .create-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 7px;
+      background: #22c55e;
+      color: #061b12;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .create-btn:hover {
+      background: #16a34a;
+    }
+
+    .message {
+      display: none;
+      padding: 12px;
+      border-radius: 7px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #071d35;
+      color: #9fb0c0;
+      text-align: center;
+      padding: 18px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        display: none;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    ⚽ GoalBet
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="vip.html">VIP</a>
+  </nav>
+
+</header>
+
+
+<main>
+
+  <div class="card">
+
+    <h1>Create Account</h1>
+
+    <p class="subtitle">
+      Create your GoalBet account and continue to the home page.
+    </p>
+
+
+    <div id="errorMessage" class="message error"></div>
+
+
+    <!-- PROFILE PICTURE -->
+
+    <div class="profile-upload">
+
+      <div class="profile-preview">
+
+        <span id="profileIcon">👤</span>
+
+        <img
+          id="profilePreview"
+          alt="Profile preview"
+        >
+
+      </div>
+
+      <label
+        class="upload-btn"
+        for="profilePicture"
+      >
+        📷 Add Profile Picture
+      </label>
+
+      <input
+        id="profilePicture"
+        type="file"
+        accept="image/png,image/jpeg,image/webp"
+        onchange="previewPicture(event)"
+      >
+
+    </div>
+
+
+    <!-- ACCOUNT FORM -->
+
+    <form
+      id="createAccountForm"
+      onsubmit="createAccount(event)"
+    >
+
+      <div class="row">
+
+        <div class="form-group">
+
+          <label for="firstName">
+            First Name
+          </label>
+
+          <input
+            id="firstName"
+            type="text"
+            placeholder="First name"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="lastName">
+            Last Name
+          </label>
+
+          <input
+            id="lastName"
+            type="text"
+            placeholder="Last name"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="username">
+          Username
+        </label>
+
+        <input
+          id="username"
+          type="text"
+          placeholder="Choose a username"
+          minlength="4"
+          maxlength="20"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="email">
+          Email Address
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="you@example.com"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="phone">
+          Phone Number
+        </label>
+
+        <input
+          id="phone"
+          type="tel"
+          placeholder="+234 800 000 0000"
+          required
+        >
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="form-group">
+
+          <label for="dob">
+            Date of Birth
+          </label>
+
+          <input
+            id="dob"
+            type="date"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="country">
+            Country
+          </label>
+
+          <select id="country" required>
+
+            <option value="">
+              Select country
+            </option>
+
+            <option value="Nigeria">
+              Nigeria
+            </option>
+
+            <option value="Ghana">
+              Ghana
+            </option>
+
+            <option value="Kenya">
+              Kenya
+            </option>
+
+            <option value="South Africa">
+              South Africa
+            </option>
+
+            <option value="United Kingdom">
+              United Kingdom
+            </option>
+
+            <option value="United States">
+              United States
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Create password"
+          minlength="8"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="confirmPassword">
+          Confirm Password
+        </label>
+
+        <input
+          id="confirmPassword"
+          type="password"
+          placeholder="Confirm password"
+          required
+        >
+
+      </div>
+
+
+      <label class="terms">
+
+        <input
+          id="terms"
+          type="checkbox"
+          required
+        >
+
+        <span>
+          I agree to the
+          <a href="terms.html">
+            Terms & Conditions
+          </a>
+          and
+          <a href="privacy.html">
+            Privacy Policy
+          </a>.
+        </span>
+
+      </label>
+
+
+      <button
+        type="submit"
+        class="create-btn"
+      >
+        Create Account
+      </button>
+
+    </form>
+
+  </div>
+
+</main>
+
+
+<footer>
+  © 2026 GoalBet · 18+ · Play responsibly
+</footer>
+
+
+<script>
+
+let profilePictureData = "";
+
+
+/*
+========================================
+PROFILE PICTURE PREVIEW
+========================================
+*/
+
+function previewPicture(event) {
+
+  const file =
+    event.target.files[0];
+
+  if (!file) return;
+
+
+  if (!file.type.startsWith("image/")) {
+
+    showError(
+      "Please select a valid image."
+    );
+
+    return;
+  }
+
+
+  if (file.size > 2 * 1024 * 1024) {
+
+    showError(
+      "Profile picture must be smaller than 2 MB."
+    );
+
+    return;
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(e) {
+
+    profilePictureData =
+      e.target.result;
+
+
+    const preview =
+      document.getElementById(
+        "profilePreview"
+      );
+
+
+    preview.src =
+      profilePictureData;
+
+
+    preview.style.display =
+      "block";
+
+
+    document.getElementById(
+      "profileIcon"
+    ).style.display =
+      "none";
+
+  };
+
+
+  reader.readAsDataURL(file);
+}
+
+
+/*
+========================================
+CREATE ACCOUNT
+========================================
+*/
+
+function createAccount(event) {
+
+  event.preventDefault();
+
+
+  const firstName =
+    document.getElementById(
+      "firstName"
+    ).value.trim();
+
+
+  const lastName =
+    document.getElementById(
+      "lastName"
+    ).value.trim();
+
+
+  const username =
+    document.getElementById(
+      "username"
+    ).value.trim();
+
+
+  const email =
+    document.getElementById(
+      "email"
+    ).value.trim();
+
+
+  const phone =
+    document.getElementById(
+      "phone"
+    ).value.trim();
+
+
+  const dob =
+    document.getElementById(
+      "dob"
+    ).value;
+
+
+  const country =
+    document.getElementById(
+      "country"
+    ).value;
+
+
+  const password =
+    document.getElementById(
+      "password"
+    ).value;
+
+
+  const confirmPassword =
+    document.getElementById(
+      "confirmPassword"
+    ).value;
+
+
+  /*
+  PASSWORD CHECK
+  */
+
+  if (password.length < 8) {
+
+    showError(
+      "Password must contain at least 8 characters."
+    );
+
+    return;
+  }
+
+
+  if (password !== confirmPassword) {
+
+    showError(
+      "Passwords do not match."
+    );
+
+    return;
+  }
+
+
+  /*
+  USERNAME CHECK
+  */
+
+  if (
+    !/^[a-zA-Z0-9_]{4,20}$/.test(
+      username
+    )
+  ) {
+
+    showError(
+      "Username must contain 4–20 letters, numbers or underscores."
+    );
+
+    return;
+  }
+
+
+  /*
+  CREATE ACCOUNT OBJECT
+  */
+
+  const account = {
+
+    id:
+      "GB-" + Date.now(),
+
+    firstName:
+      firstName,
+
+    lastName:
+      lastName,
+
+    username:
+      username,
+
+    email:
+      email,
+
+    phone:
+      phone,
+
+    dob:
+      dob,
+
+    country:
+      country,
+
+    profilePicture:
+      profilePictureData,
+
+    vipStatus:
+      "Not a VIP member",
+
+    balance:
+      0,
+
+    status:
+      "active",
+
+    createdAt:
+      new Date().toLocaleString()
+
+  };
+
+
+  /*
+  SAVE ACCOUNT
+  */
+
+  localStorage.setItem(
+    "goalbetAccount",
+    JSON.stringify(account)
+  );
+
+
+  /*
+  MARK USER AS LOGGED IN
+  */
+
+  sessionStorage.setItem(
+    "goalbetLoggedIn",
+    "true"
+  );
+
+
+  /*
+  GO DIRECTLY TO HOME PAGE
+  */
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/*
+========================================
+ERROR MESSAGE
+========================================
+*/
+
+function showError(message) {
+
+  const error =
+    document.getElementById(
+      "errorMessage"
+    );
+
+  error.textContent =
+    message;
+
+  error.style.display =
+    "block";
+
+}
+
+</script>
+
+</body>
+</html>
